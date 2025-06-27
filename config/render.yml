@@ -1,0 +1,36 @@
+databases:
+  - name: my_store_test
+    databaseName: my_store
+    user: my_store_user
+    plan: free
+
+services:
+  - type: web
+    name: my_store_web
+    env: ruby
+    plan: free
+    buildCommand: ./bin/render-build.sh
+    startCommand: ./bin/render-start.sh
+    envVars:
+      - key: RAILS_ENV
+        value: staging
+      - key: RAILS_MASTER_KEY
+        sync: false
+      - key: RAILS_SERVE_STATIC_FILES
+        value: true
+      - key: RAILS_LOG_TO_STDOUT
+        value: true
+      - key: RAILS_MAX_THREADS
+        value: 5
+      - key: WEB_CONCURRENCY
+        value: 2
+      - key: NODE_ENV
+        value: staging
+      - key: NPM_CONFIG_PRODUCTION
+        value: false
+    autoDeploy: true
+    healthCheckPath: /up
+    disk:
+      name: rails-storage
+      mountPath: /rails/storage
+      sizeGB: 1
