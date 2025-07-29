@@ -58,4 +58,4 @@ gem "inertia_rails", "~> 3.9"
 
 gem "vite_rails", "~> 3.0"
 
-gem "pg", "~> 1.5"
+gem "pg", "~> 1.6"
